@@ -4,13 +4,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.thedailygrind.components.AppBar
 import com.example.thedailygrind.ui.theme.TheDailyGrindTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +25,41 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TheDailyGrindTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                AppContainer()
             }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name! tmro",
+fun AppContainer (modifier: Modifier = Modifier) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    Scaffold (
         modifier = modifier
-    )
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = { AppBar(scrollBehavior = scrollBehavior) }
+    ) { innerPadding ->
+        AppContent(innerPadding)
+    }
+}
+
+@Composable
+fun AppContent (innerPadding: PaddingValues, modifier: Modifier = Modifier) {
+    Box (
+        modifier = modifier
+            .padding(innerPadding)
+            .fillMaxSize()
+    ) {
+
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun AppPreview() {
     TheDailyGrindTheme {
-        Greeting("Android")
+        AppContainer()
     }
 }
