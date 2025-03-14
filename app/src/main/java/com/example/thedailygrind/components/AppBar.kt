@@ -7,12 +7,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import com.example.thedailygrind.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar (scrollBehavior: TopAppBarScrollBehavior) {
+fun AppBar (scrollBehavior: TopAppBarScrollBehavior, modifier: Modifier = Modifier) {
     CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -22,9 +24,12 @@ fun AppBar (scrollBehavior: TopAppBarScrollBehavior) {
             Text(
                 text = stringResource(R.string.app_name),
                 style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.primary
+                modifier = Modifier
+                    .testTag("testTag_AppBarText")
             )
         },
-        scrollBehavior = scrollBehavior
+        scrollBehavior = scrollBehavior,
+        modifier = modifier
+            .testTag("testTag_AppBar")
     )
 }
