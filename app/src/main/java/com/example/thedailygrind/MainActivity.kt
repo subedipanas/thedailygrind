@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.thedailygrind.components.AppBar
+import com.example.thedailygrind.features.pomodoro.PomodoroTimer
 import com.example.thedailygrind.ui.theme.TheDailyGrindTheme
 
 class MainActivity : ComponentActivity() {
@@ -55,7 +56,7 @@ fun AppContent (innerPadding: PaddingValues, modifier: Modifier = Modifier) {
             .background(color = MaterialTheme.colorScheme.surface)
             .fillMaxSize()
     ) {
-
+        PomodoroTimer()
     }
 }
 
