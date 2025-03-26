@@ -19,16 +19,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.thedailygrind.R
+import com.example.thedailygrind.features.pomodoro.data.TimerState
 import com.example.thedailygrind.ui.theme.TheDailyGrindTheme
 
 @Composable
 fun PomodoroTimer(
     modifier: Modifier = Modifier,
-    pomodoroViewModel: PomodoroViewModel = viewModel(),
+    pomodoroViewModel: PomodoroViewModel = viewModel(factory = PomodoroViewModel.Factory),
 ) {
-    val appState by pomodoroViewModel.timerState.collectAsStateWithLifecycle()
+    val appState by pomodoroViewModel.appState.collectAsStateWithLifecycle()
 
-    Row (
+    Row(
         horizontalArrangement = Arrangement.SpaceAround,
         modifier = modifier
             .padding(vertical = dimensionResource(R.dimen.layout_row_padding_vertical))
@@ -36,7 +37,7 @@ fun PomodoroTimer(
     ) {
         Button(
             onClick = { pomodoroViewModel.startTimer() },
-            enabled = appState.timerState == TimerState.Stopped,
+            enabled = appState.timerState != TimerState.Running,
         ) {
             Text(
                 text = stringResource(R.string.start_button),
@@ -45,7 +46,7 @@ fun PomodoroTimer(
         }
 
         Button(
-            onClick = { pomodoroViewModel.stopTimer() },
+            onClick = { pomodoroViewModel.pauseTimer() },
             enabled = appState.timerState == TimerState.Running,
         ) {
             Text(
