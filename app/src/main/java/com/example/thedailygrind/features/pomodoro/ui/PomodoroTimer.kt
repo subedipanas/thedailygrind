@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,6 +39,8 @@ fun PomodoroTimer(
         Button(
             onClick = { pomodoroViewModel.startTimer() },
             enabled = appState.timerState != TimerState.Running,
+            modifier = Modifier
+                .testTag(stringResource(R.string.tt_pomodoro_start_button))
         ) {
             Text(
                 text = stringResource(R.string.start_button),
@@ -48,6 +51,8 @@ fun PomodoroTimer(
         Button(
             onClick = { pomodoroViewModel.pauseTimer() },
             enabled = appState.timerState == TimerState.Running,
+            modifier = Modifier
+                .testTag(stringResource(R.string.tt_pomodoro_pause_button))
         ) {
             Text(
                 text = stringResource(R.string.pause_button),
@@ -58,6 +63,8 @@ fun PomodoroTimer(
         Button(
             onClick = { pomodoroViewModel.stopTimer() },
             enabled = appState.timerState == TimerState.Running,
+            modifier = Modifier
+                .testTag(stringResource(R.string.tt_pomodoro_stop_button))
         ) {
             Text(
                 text = stringResource(R.string.end_button),
