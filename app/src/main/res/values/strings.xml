@@ -3,4 +3,9 @@
     <string name="start_button">Start</string>
     <string name="pause_button">Pause</string>
     <string name="end_button">End</string>
+
+    <!-- Test tags -->
+    <string name="tt_pomodoro_start_button">tt_Pomodoro_StartButton</string>
+    <string name="tt_pomodoro_pause_button">tt_Pomodoro_PauseButton</string>
+    <string name="tt_pomodoro_stop_button">tt_Pomodoro_StopButton</string>
 </resources>
